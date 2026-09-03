@@ -48,6 +48,88 @@
     transition: 0.3s;
 }
 
+.mobile{
+    display: none;
+}
+
+.mobile__menu{
+    z-index: 99;
+    color: white;
+}
+
+
+.mobile__dropdown{
+    height: 100%;
+    position: fixed;
+    background: #00000042;
+    top: 0;
+    width: 120px;
+    right: -120px;
+    padding-top: 65px;
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.5);
+    list-style: none;
+}
+
+#menu[type="checkbox"]:checked + .mobile__dropdown{
+    right: 0;
+}
+
+#menu[type="checkbox"]{
+    opacity: 0;
+    position: absolute;
+}
+
+@keyframes adjust-header {
+  from {
+    background-color: #322E41;
+  }
+  to {
+    background-color: #322E41;
+  }
+}
+
+/* 2. Apply it to your element */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  
+  /* Link the animation to the root scroll progress */
+  animation: adjust-header linear both;
+  animation-timeline: scroll(root);
+  
+  /* Optional: Limit the effect to just the first 300px of scrolling */
+  animation-range: 0px 300px; 
+}
+
+@keyframes close_menu {
+  10% {
+    right: -30px;
+  }
+  30% {
+    right: -60px;
+  }
+  60% {
+    right: -90px;
+  }
+  80% {
+    right: -100px;
+  }
+  100%{
+    right: -120px;
+  }
+}
+
+#menu[type="checkbox"]:checked + .mobile__dropdown{
+    animation: close_menu linear both;
+    animation-timeline: scroll(root);
+}
+
+
+.mobile__dropdown .header__link{
+    height: 40px;
+}
+
 .header__link:hover {
     color: #D47300;
     background: white;
@@ -90,8 +172,12 @@
 .blocks__left{
     padding: 15px;
     background: white;
-    width: 540px;
+    max-width: 540px;
     border-radius: 6px;
+}
+
+.blocks__left>img{
+    width: 100%;
 }
 
 .blocks__title{
@@ -132,7 +218,7 @@
 }
 
 .footer{
-    height: 260px;
+    min-height: 260px;
     background: #322E41;
     padding-top: 37px;
 }
@@ -145,6 +231,7 @@
 
 .footer__form{
     width: 350px;
+    max-width: 350px;
     display: flex;
     flex-direction: column;
     gap: 10px;
